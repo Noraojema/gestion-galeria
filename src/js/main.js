@@ -1,4 +1,7 @@
-var $=require('jquery');
+import $ from "jquery";
+window.jQuery=window.$=$;
+import{Pintor,getAll} from "./pintores";
+//require("boostrap");
 
 var pintores=[
 {"codigo":1,"nombre":"Pablo Picasso","descripcion":"Pablo Ruiz Picasso1 (Málaga, 25 de octubre de 1881-Mougins, 8 de abril de 1973)"},
@@ -11,8 +14,8 @@ var obras=[{"codigo":1,"nombre":"Maternidad","descripcion":"La imagen de la mate
 ,{"codigo":2,"nombre":"El Guernica","descripcion":"Guernica es un famoso cuadro de Pablo Picasso, pintado entre los meses de mayo y junio de 1937, cuyo título alude al bombardeo de Guernica, ocurrido el 26 de abril de dicho año, durante la Guerra Civil Española."},
     {"codigo":3,"nombre":"Los tres músicos","descripcion":"Este cuadro, pintado por Pablo Ruiz Picasso durante su estancia en Fontainebleau, en verano de 1921, es una de sus obras más célebres de lo que se ha llamado cubismo sintético"}
 ];
-$.noConflict();
-$(document).ready(function($) {
+
+
     // Code that uses jQuery's $ can follow here.
     $("#contactForm").on("submit",validarFormularioContacto);
     $("#listadoPintores div a:last-child").click(borrarVarios);
@@ -157,8 +160,6 @@ $(document).ready(function($) {
             $("#listadoObras").text("No se han encontrado obras");
         }
     }
-});
-
 
 function  validarNombre(nombre) {
     const pattern=new RegExp(/[a-zA-Z]{3,}/);
