@@ -1,13 +1,9 @@
 /**
  * Created by Curso on 17/05/2017.
  */
-import $ from "jquery";
-window.jQuery=window.$=$;
 import  * as service from "./genericservice";
-
-
 const urlPintores = "http://localhost:8080/gestiongaleria/api/pintores";
-export  class PintorServive extends service.GenericService{
+export  class PintorService extends service.GenericService{
     constructor(){
         super();
         this.codigo = "";
@@ -15,20 +11,39 @@ export  class PintorServive extends service.GenericService{
         this.descripcion = "";
     }
     getAll() {
-        return super.ajax(urlPintores, "get", null);
+        return super.ajax(urlPintores,"get", null);
     }
     getById(codigo){
         return super.ajax(urlPintores+"/"+codigo,"get",null);
     }
 }
-export class PintorService{
-    constructor(codigo,nombre,descripcion){
+export class Pintor {
+    constructor(codigo, nombre, descripcion) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.descripcion = descripcion;
     }
-}
 
+    get codigo() {
+        return this._codigo;
+    }
+    set codigo(codigo) {
+        this._codigo = codigo;
+    }
+    get nombre(){
+        return this._nombre;
+    }
+    set nombre(nombre){
+        this._nombre=nombre;
+    }
+    get descripcion(){
+        return this._descripcion;
+    }
+    set descripcion(descripcion){
+        this._descripcion;
+    }
+}
+/*
 var Pintor =function (codigo,nombre,descripcion) {
     this.codigo = codigo;
     this.nombre = nombre;
@@ -98,4 +113,4 @@ function ajax(opciones) {
         $.ajax(opciones).done(resolve).fail(reject);
     });
 }
-
+*/

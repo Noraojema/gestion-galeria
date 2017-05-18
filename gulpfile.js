@@ -16,6 +16,6 @@ gulp.task('compile-js',function() {
         .bundle()
         .pipe(source('all-min.js'))
         .pipe(buffer())
-        .pipe(uglify())
+        //.pipe(uglify())
         .pipe(gulp.dest('./dist/js'));
 });

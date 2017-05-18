@@ -1,7 +1,21 @@
 import $ from "jquery";
 window.jQuery=window.$=$;
-import{Pintor,getAll} from "./pintores";
+import * as pintor from "./pintores";
 //require("boostrap");
+
+var $listadoPintores=$("#listadoPintores");
+if($listadoPintores.length){
+    var as=new pintor.PintorService();
+    as.getAll()
+        .then(function (data) {
+            cargarArrayPintores(JSON.parse(data));
+        },function (error) {
+            console.log(error);
+        }).catch(function () {
+
+    });
+}
+/*
 
 var pintores=[
 {"codigo":1,"nombre":"Pablo Picasso","descripcion":"Pablo Ruiz Picasso1 (Málaga, 25 de octubre de 1881-Mougins, 8 de abril de 1973)"},
@@ -9,7 +23,7 @@ var pintores=[
 {"codigo":3,"nombre":"Vincent van Gogh","descripcion":"Vincent Willem van Gogh(Zundert, Países Bajos, 30 de marzo de 1853-Auvers-sur-Oise, Francia, 29 de julio de 1890)"},
 {"codigo":4,"nombre":"Claude Monet","descripcion":"Oscar-Claude Monet (París, 14 de noviembre de 1840-Giverny, 5 de diciembre de 1926)"},
 {"codigo":5,"nombre":"El Greco","descripcion":"Doménikos Theotokópoulos (Candía, 1541-Toledo, 1614), conocido como el Greco («el griego»)"}
-];
+];*/
 var obras=[{"codigo":1,"nombre":"Maternidad","descripcion":"La imagen de la maternidad es una de las más características de la época azul de Pablo Picasso (1901-1904): este cuadro corresponde a dicho periodo."}
 ,{"codigo":2,"nombre":"El Guernica","descripcion":"Guernica es un famoso cuadro de Pablo Picasso, pintado entre los meses de mayo y junio de 1937, cuyo título alude al bombardeo de Guernica, ocurrido el 26 de abril de dicho año, durante la Guerra Civil Española."},
     {"codigo":3,"nombre":"Los tres músicos","descripcion":"Este cuadro, pintado por Pablo Ruiz Picasso durante su estancia en Fontainebleau, en verano de 1921, es una de sus obras más célebres de lo que se ha llamado cubismo sintético"}
@@ -108,8 +122,9 @@ var obras=[{"codigo":1,"nombre":"Maternidad","descripcion":"La imagen de la mate
         }
         return false;
     }
-    cargarArrayPintores();
-    function cargarArrayPintores() {
+   /* cargarArrayPintores();*/
+    function cargarArrayPintores(pintores) {
+
         //recorrer el array
         if(pintores.length > 0) {
             for(var i = 0; i < pintores.length; i++) {
@@ -128,7 +143,7 @@ var obras=[{"codigo":1,"nombre":"Maternidad","descripcion":"La imagen de la mate
                 //-->
 
             }
-            $("#tablaPintores tfoot td").html("<span class='text-error'>Total pintores:</span>" + obras.length);
+            $("#tablaPintores tfoot td").html("<span class='text-error'>Total pintores:</span>" + pintores.length);
         }else{
             $("#tablaPintores").remove();
             $("#listadoPintores").text("No se han encontrado pintores");
@@ -154,7 +169,7 @@ var obras=[{"codigo":1,"nombre":"Maternidad","descripcion":"La imagen de la mate
                 $("#tablaObras tbody").append(texto);
                 //-->
             }
-            $("#tablaObras tfoot td").html("<span class='text-error'>Total obras:</span>" + pintores.length);
+            $("#tablaObras tfoot td").html("<span class='text-error'>Total obras:</span>" + obras.length);
         }else{
             $("#tablaObras").remove();
             $("#listadoObras").text("No se han encontrado obras");
