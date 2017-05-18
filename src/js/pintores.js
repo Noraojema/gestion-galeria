@@ -6,9 +6,9 @@ const urlPintores = "http://localhost:8080/gestiongaleria/api/pintores";
 export  class PintorService extends service.GenericService{
     constructor(){
         super();
-        this.codigo = "";
-        this.nombre = "";
-        this.descripcion = "";
+        this._codigo = "";
+        this._nombre = "";
+        this._descripcion = "";
     }
     getAll() {
         return super.ajax(urlPintores,"get", null);
@@ -19,9 +19,9 @@ export  class PintorService extends service.GenericService{
 }
 export class Pintor {
     constructor(codigo, nombre, descripcion) {
-        this.codigo = codigo;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
+        this._codigo = codigo;
+        this._nombre = nombre;
+        this._descripcion = descripcion;
     }
 
     get codigo() {

@@ -1,14 +1,27 @@
 import $ from "jquery";
 window.jQuery=window.$=$;
 import * as pintor from "./pintores";
+import * as obra from "./obras";
 //require("boostrap");
 
 var $listadoPintores=$("#listadoPintores");
 if($listadoPintores.length){
-    var as=new pintor.PintorService();
-    as.getAll()
+    var ps=new pintor.PintorService();
+    ps.getAll()
         .then(function (data) {
             cargarArrayPintores(JSON.parse(data));
+        },function (error) {
+            console.log(error);
+        }).catch(function () {
+
+    });
+}
+var $listadoObras=$("#listadoObras");
+if($listadoObras.length){
+    var os=new obra.ObraService();
+    os.getAll()
+        .then(function (data) {
+            cargarArrayObras(JSON.parse(data));
         },function (error) {
             console.log(error);
         }).catch(function () {
@@ -23,12 +36,12 @@ var pintores=[
 {"codigo":3,"nombre":"Vincent van Gogh","descripcion":"Vincent Willem van Gogh(Zundert, Países Bajos, 30 de marzo de 1853-Auvers-sur-Oise, Francia, 29 de julio de 1890)"},
 {"codigo":4,"nombre":"Claude Monet","descripcion":"Oscar-Claude Monet (París, 14 de noviembre de 1840-Giverny, 5 de diciembre de 1926)"},
 {"codigo":5,"nombre":"El Greco","descripcion":"Doménikos Theotokópoulos (Candía, 1541-Toledo, 1614), conocido como el Greco («el griego»)"}
-];*/
+];
 var obras=[{"codigo":1,"nombre":"Maternidad","descripcion":"La imagen de la maternidad es una de las más características de la época azul de Pablo Picasso (1901-1904): este cuadro corresponde a dicho periodo."}
 ,{"codigo":2,"nombre":"El Guernica","descripcion":"Guernica es un famoso cuadro de Pablo Picasso, pintado entre los meses de mayo y junio de 1937, cuyo título alude al bombardeo de Guernica, ocurrido el 26 de abril de dicho año, durante la Guerra Civil Española."},
     {"codigo":3,"nombre":"Los tres músicos","descripcion":"Este cuadro, pintado por Pablo Ruiz Picasso durante su estancia en Fontainebleau, en verano de 1921, es una de sus obras más célebres de lo que se ha llamado cubismo sintético"}
 ];
-
+*/
 
     // Code that uses jQuery's $ can follow here.
     $("#contactForm").on("submit",validarFormularioContacto);
@@ -150,8 +163,8 @@ var obras=[{"codigo":1,"nombre":"Maternidad","descripcion":"La imagen de la mate
         }
     }
 
-    cargarArrayObras();
-    function cargarArrayObras() {
+   // cargarArrayObras();
+    function cargarArrayObras(obras) {
         //recorrer el array
         if(obras.length > 0) {
             for(var i = 0; i < obras.length; i++) {
