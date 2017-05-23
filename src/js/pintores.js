@@ -1,6 +1,7 @@
 /**
  * Created by Curso on 17/05/2017.
  */
+"use strict";
 import  * as service from "./genericservice";
 const urlPintores = "http://localhost:8080/gestiongaleria/api/pintores";
 export  class PintorService extends service.GenericService{
@@ -16,6 +17,7 @@ export  class PintorService extends service.GenericService{
     getById(codigo){
         return super.ajax(urlPintores+"/"+codigo,"get",null);
     }
+    
 }
 export class Pintor {
     constructor(codigo, nombre, descripcion) {
@@ -43,6 +45,20 @@ export class Pintor {
         this._descripcion;
     }
 }
+
+function  parseForm(pintor) {
+    let txt="";
+    txt="<form action='#' id='alumnoForm' method='post'>";
+    txt+="<input type='text' name='nombre' id='nombre' value='"+pintor.nombre()+"'>";
+    txt+="</form>";
+    return txt;
+}
+
+
+
+
+
+
 /*
 var Pintor =function (codigo,nombre,descripcion) {
     this.codigo = codigo;

@@ -1,3 +1,4 @@
+"use strict";
 import $ from "jquery";
 window.jQuery=window.$=$;
 import * as pintor from "./pintores";
@@ -17,6 +18,7 @@ if($listadoPintores.length){
     });
 }
 var $listadoObras=$("#listadoObras");
+
 if($listadoObras.length){
     var os=new obra.ObraService();
     os.getAll()
@@ -28,6 +30,19 @@ if($listadoObras.length){
 
     });
 }
+
+var $contactForm = $("#contactForm");
+/*
+if($listadoObras.length) {//estamos en la página de alumnos
+    let p1 = obra.renderizar();
+    p1.then(function (txt) {
+        $listadoObras.find("div.flexcontainer:last-child").append(txt);
+    }).catch(function (txt) {
+
+    });
+}
+
+*/
 /*
 
 var pintores=[
@@ -60,6 +75,7 @@ var obras=[{"codigo":1,"nombre":"Maternidad","descripcion":"La imagen de la mate
         var descripcion=$(this).parents("tr").find("td:nth-child(3)").text();
 
     });
+/*
     $("#listadoObras div a:last-child").click(borrarVarios);
     $("#tablaObras tbody").on("click","td:last-child button:last-child",function(){
         //alert("has pulsado el boton de borrado");
@@ -75,6 +91,18 @@ var obras=[{"codigo":1,"nombre":"Maternidad","descripcion":"La imagen de la mate
         var descripcion=$(this).parents("tr").find("td:nth-child(3)").text();
 
     });
+*/
+
+$listadoObras.find("div a:last-child").click(borrarVarios);
+$listadoObras.find("#tablaObras tbody").on("click","td:last-child button:last-child",function(){
+    var codigo = $(this).parents("tr").find("input[type=checkbox]").val();
+    $(this).parents("tr").remove();
+});
+$listadoObras.find("#tablaObras tbody").on("click","td:last-child button:first-child",function(){
+    var codigo = $(this).parents("tr").find("input[type=checkbox]").val();
+    var nombre = $(this).parents("tr").find("td:nth-child(2)").text();
+    var descripcion = $(this).parents("tr").find("td:nth-child(3)").text();
+});
     $("#borrartodos").click(function (event) {
         if($(this).is(":checked")) {
             $("tbody input[type=checkbox]").prop("checked", true);
@@ -209,10 +237,10 @@ function validarDni(dni) {
     var valido =true;
     const pattern=new RegExp(/\d{8}[a-z][A-Z]/);
     if(pattern.test(dni)) {
-        numero = parseInt(dni.substr(0, dni.length - 1), 10);
-        letr = dni.substr(dni.length - 1, 1);
+        var numero = parseInt(dni.substr(0, dni.length - 1), 10);
+        var letr = dni.substr(dni.length - 1, 1);
         numero = numero % 23;
-        letra = 'TRWAGMYFPDXBNJZSQVHLCKET';
+        var letra = 'TRWAGMYFPDXBNJZSQVHLCKET';
         letra = letra.substring(numero, numero + 1);
         if (letra != letr.toUpperCase()) {
             valido = false;
